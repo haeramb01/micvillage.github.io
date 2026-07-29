@@ -758,6 +758,7 @@
   }
   .recipe-section.hidden { display: none; }
   .video-section.hidden { display: none; }
+  .grass-section.hidden { display: none; }
 
   .recipe-shop-tabs {
     display: flex; gap: 0;
@@ -1041,6 +1042,10 @@
       <span>🔬 조합법</span>
     </button>
     <button class="tab-btn" data-cat="video">🎬 홍보 영상</button>
+    <button class="tab-btn" data-cat="grass">
+      <span class="dot" style="background:#4ade80"></span>
+      <span>🌱 잔디 블록이 필요해요!</span>
+    </button>
   </div>
 </div>
 
@@ -1064,6 +1069,29 @@
             style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:linear-gradient(135deg,#14b8a6,#0d9488);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Pretendard','Noto Sans KR',sans-serif;transition:opacity 0.15s"
             onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
             ⬇️ 영상 다운로드
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="grass-section hidden" id="grassSection" data-cat="grass">
+  <div style="max-width:860px;margin:20px auto;padding:0 16px">
+    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden">
+      <div style="background:linear-gradient(135deg,#4ade80,#22c55e);padding:18px 24px;color:#fff">
+        <h3 style="margin:0;font-size:17px;font-family:'Pretendard','Noto Sans KR',sans-serif;font-weight:600">🌱 잔디 블록이 필요해요!</h3>
+      </div>
+      <div style="padding:20px">
+        <div style="position:relative;width:100%;padding-bottom:141.42%;border-radius:10px;overflow:hidden;background:#f4f4f4;border:1px solid #e5e7eb">
+          <iframe src="https://drive.google.com/file/d/1eWXRcox036edE62iEw7rymQAyLL4TKVf/preview"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:none"
+            allow="autoplay"></iframe>
+        </div>
+        <div style="margin-top:16px;text-align:center">
+          <a href="https://drive.google.com/uc?export=download&id=1eWXRcox036edE62iEw7rymQAyLL4TKVf"
+            style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:linear-gradient(135deg,#4ade80,#22c55e);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Pretendard','Noto Sans KR',sans-serif;transition:opacity 0.15s"
+            onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            ⬇️ PDF 다운로드
           </a>
         </div>
       </div>
@@ -1829,10 +1857,12 @@ document.getElementById('tabsBar').addEventListener('click', e => {
   const mapSec = document.getElementById('mapSection');
   const recipeSec = document.getElementById('recipeSection');
   const videoSec = document.getElementById('videoSection');
+  const grassSec = document.getElementById('grassSection');
   if (activeTab === 'mapview') {
     mapSec.classList.remove('hidden');
     if(recipeSec) recipeSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
+    if(grassSec) grassSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1841,6 +1871,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     if(recipeSec) recipeSec.classList.remove('hidden');
     mapSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
+    if(grassSec) grassSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1849,6 +1880,16 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     if(videoSec) videoSec.classList.remove('hidden');
     mapSec.classList.add('hidden');
     if(recipeSec) recipeSec.classList.add('hidden');
+    if(grassSec) grassSec.classList.add('hidden');
+    document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
+    emptyState.classList.remove('show');
+    searchInput.value = '';
+    searchCount.textContent = '';
+  } else if (activeTab === 'grass') {
+    if(grassSec) grassSec.classList.remove('hidden');
+    mapSec.classList.add('hidden');
+    if(recipeSec) recipeSec.classList.add('hidden');
+    if(videoSec) videoSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1857,6 +1898,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     mapSec.classList.add('hidden');
     if(recipeSec) recipeSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
+    if(grassSec) grassSec.classList.add('hidden');
     applyFilters();
   }
 });
@@ -1867,6 +1909,14 @@ searchInput.addEventListener('input', () => {
   document.querySelectorAll('.tab-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.cat === 'all');
   });
+  const mapSecS = document.getElementById('mapSection');
+  const recipeSecS = document.getElementById('recipeSection');
+  const videoSecS = document.getElementById('videoSection');
+  const grassSecS = document.getElementById('grassSection');
+  if(mapSecS) mapSecS.classList.add('hidden');
+  if(recipeSecS) recipeSecS.classList.add('hidden');
+  if(videoSecS) videoSecS.classList.add('hidden');
+  if(grassSecS) grassSecS.classList.add('hidden');
   applyFilters();
 });
 
