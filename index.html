@@ -1508,6 +1508,12 @@ const FAQ_DATA = [
   // ── 맵 운영 & 저장 ──
   {
     cat: 'map', catLabel: '맵 운영 & 저장', catEmoji: '💾', catClass: 'cat-blue',
+    q: '맵 저장 전 꼭 확인해주세요!',
+    a: `메인 화면에서 <strong>[설정] → [클라우드 저장공간] → [OneDrive에 세계 백업 활성화]</strong> 앞 토글이 <strong>왼쪽</strong>으로 향하도록 설정해주세요!`,
+    warn: `토글이 켜져있는 경우, 저장 시 오류 메세지가 나오게 됩니다.`
+  },
+  {
+    cat: 'map', catLabel: '맵 운영 & 저장', catEmoji: '💾', catClass: 'cat-blue',
     q: '수업이 끝난 후 맵을 어떻게 저장하나요?',
     a: `<strong>ESC → 관리 → 내보내기</strong> 순서로 클릭하면 됩니다. 저장 시 파일명에 <strong>날짜와 반 이름</strong>을 꼭 포함하세요.<br>예: <code>20260605_3학년A반</code><br><br>다음 수업에서 불러올 때는 <strong>가져오기</strong>를 눌러 해당 파일을 선택하면 됩니다.`,
     warn: `저장 없이 종료하면 그날 학생들이 한 모든 작업이 사라집니다. 수업 마무리 5분 전에 저장 공지를 습관화하세요.`
@@ -1584,6 +1590,12 @@ const FAQ_DATA = [
   },
 
   // ── 돌발 상황 대처 ──
+  {
+    cat: 'trouble', catLabel: '돌발 상황 대처', catEmoji: '🚨', catClass: 'cat-amber',
+    q: '은행에서 입금이 안 돼요.',
+    a: `슬롯에 COIN 아이템이 <strong>1장만</strong> 있는지 확인해주세요.<br>여러 장이 있을 경우, 인식하지 못하는 경우가 있습니다.`,
+    tip: `COIN 아이템이 여러 장이라면 마우스 오른쪽 버튼으로 클릭해서 빈 슬롯으로 옮겨주세요.`
+  },
   {
     cat: 'trouble', catLabel: '돌발 상황 대처', catEmoji: '🚨', catClass: 'cat-amber',
     q: '학생이 던전에 갇혀서 나오지 못합니다.',
