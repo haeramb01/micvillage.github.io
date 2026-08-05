@@ -759,6 +759,7 @@
   .recipe-section.hidden { display: none; }
   .video-section.hidden { display: none; }
   .grass-section.hidden { display: none; }
+  .server-section.hidden { display: none; }
 
   .recipe-shop-tabs {
     display: flex; gap: 0;
@@ -1046,6 +1047,10 @@
       <span class="dot" style="background:#4ade80"></span>
       <span>🌱 잔디 블록이 필요해요!</span>
     </button>
+    <button class="tab-btn" data-cat="server">
+      <span class="dot" style="background:#6366f1"></span>
+      <span>🌐 서버로 연결하는 방법(v.260805)</span>
+    </button>
   </div>
 </div>
 
@@ -1090,6 +1095,29 @@
         <div style="margin-top:16px;text-align:center">
           <a href="https://drive.google.com/uc?export=download&id=1eWXRcox036edE62iEw7rymQAyLL4TKVf"
             style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:linear-gradient(135deg,#4ade80,#22c55e);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Pretendard','Noto Sans KR',sans-serif;transition:opacity 0.15s"
+            onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+            ⬇️ PDF 다운로드
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="server-section hidden" id="serverSection" data-cat="server">
+  <div style="max-width:860px;margin:20px auto;padding:0 16px">
+    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden">
+      <div style="background:linear-gradient(135deg,#6366f1,#4f46e5);padding:18px 24px;color:#fff">
+        <h3 style="margin:0;font-size:17px;font-family:'Pretendard','Noto Sans KR',sans-serif;font-weight:600">🌐 서버로 연결하는 방법(v.260805)</h3>
+      </div>
+      <div style="padding:20px">
+        <div style="position:relative;width:100%;padding-bottom:141.42%;border-radius:10px;overflow:hidden;background:#f4f4f4;border:1px solid #e5e7eb">
+          <iframe src="https://drive.google.com/file/d/1VTJ8Nj0Ls2HrFETPrZpsocpz6_Snj8xj/preview"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:none"
+            allow="autoplay"></iframe>
+        </div>
+        <div style="margin-top:16px;text-align:center">
+          <a href="https://drive.google.com/uc?export=download&id=1VTJ8Nj0Ls2HrFETPrZpsocpz6_Snj8xj"
+            style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;border-radius:10px;text-decoration:none;font-size:14px;font-weight:600;font-family:'Pretendard','Noto Sans KR',sans-serif;transition:opacity 0.15s"
             onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
             ⬇️ PDF 다운로드
           </a>
@@ -1632,7 +1660,7 @@ const FAQ_DATA = [
   {
     cat: 'trouble', catLabel: '돌발 상황 대처', catEmoji: '🚨', catClass: 'cat-amber',
     q: "'고물상'의 상자에 넣은 물건이 사라지지 않아요.",
-    a: `맵 오류가 발생했어요. 수업이 종료된 뒤, <strong>[내보내기]</strong>를 통해 파일을 전달해 주시면 수정하여 전달해 드립니다.<br><br>파일 전달 주소 : <strong>jihyo0111@miraenep.com</strong>`,
+    a: `수업이 종료된 뒤, <strong>[내보내기]</strong>를 통해 파일을 전달해 주세요.<br><br>파일 전달 주소 : <strong>jihyo0111@miraenep.com</strong>`,
     warn: `과도하게 많은 물건을 넣은 뒤 사라지기를 기다리지 않고 나오면 오류가 쉽게 발생해요.<br>'뼛가루'와 '물양동이'는 넣지 말아주세요.`
   },
   // ── 명령어 모음 ──
@@ -1876,11 +1904,13 @@ document.getElementById('tabsBar').addEventListener('click', e => {
   const recipeSec = document.getElementById('recipeSection');
   const videoSec = document.getElementById('videoSection');
   const grassSec = document.getElementById('grassSection');
+  const serverSec = document.getElementById('serverSection');
   if (activeTab === 'mapview') {
     mapSec.classList.remove('hidden');
     if(recipeSec) recipeSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
+    if(serverSec) serverSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1890,6 +1920,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     mapSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
+    if(serverSec) serverSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1899,6 +1930,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     mapSec.classList.add('hidden');
     if(recipeSec) recipeSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
+    if(serverSec) serverSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1908,6 +1940,17 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     mapSec.classList.add('hidden');
     if(recipeSec) recipeSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
+    if(serverSec) serverSec.classList.add('hidden');
+    document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
+    emptyState.classList.remove('show');
+    searchInput.value = '';
+    searchCount.textContent = '';
+  } else if (activeTab === 'server') {
+    if(serverSec) serverSec.classList.remove('hidden');
+    mapSec.classList.add('hidden');
+    if(recipeSec) recipeSec.classList.add('hidden');
+    if(videoSec) videoSec.classList.add('hidden');
+    if(grassSec) grassSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1917,6 +1960,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     if(recipeSec) recipeSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
+    if(serverSec) serverSec.classList.add('hidden');
     applyFilters();
   }
 });
@@ -1931,10 +1975,12 @@ searchInput.addEventListener('input', () => {
   const recipeSecS = document.getElementById('recipeSection');
   const videoSecS = document.getElementById('videoSection');
   const grassSecS = document.getElementById('grassSection');
+  const serverSecS = document.getElementById('serverSection');
   if(mapSecS) mapSecS.classList.add('hidden');
   if(recipeSecS) recipeSecS.classList.add('hidden');
   if(videoSecS) videoSecS.classList.add('hidden');
   if(grassSecS) grassSecS.classList.add('hidden');
+  if(serverSecS) serverSecS.classList.add('hidden');
   applyFilters();
 });
 
