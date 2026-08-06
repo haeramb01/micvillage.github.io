@@ -224,6 +224,22 @@
     font-size: 11px;
     opacity: 0.75;
   }
+  .faq-subtabs {
+    display: none;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-basis: 100%;
+    width: 100%;
+    margin-top: 4px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+  }
+  .faq-subtabs.open { display: flex; }
+  .group-arrow {
+    font-size: 10px;
+    margin-left: 1px;
+    opacity: 0.8;
+  }
 
   /* ── Main ── */
   main {
@@ -760,6 +776,7 @@
   .video-section.hidden { display: none; }
   .grass-section.hidden { display: none; }
   .server-section.hidden { display: none; }
+  .servervideo-section.hidden { display: none; }
 
   .recipe-shop-tabs {
     display: flex; gap: 0;
@@ -1006,41 +1023,14 @@
 
 <div class="tabs-wrap">
   <div class="tabs" id="tabsBar">
-    <button class="tab-btn active" data-cat="all">
-      <span>전체</span><span class="count" id="cnt-all"></span>
-    </button>
         <button class="tab-btn" data-cat="mapview">
       <span class="dot" style="background:#34d399"></span>
       <span>🗺️ 맵 약도</span>
     </button>
-    <button class="tab-btn" data-cat="prep">
+    <button class="tab-btn" id="faqGroupBtn" data-cat="faqgroup" onclick="toggleFaqGroup(event)">
       <span class="dot" style="background:#a78bfa"></span>
-      <span>⚙️ 수업 준비 &amp; 세팅</span><span class="count" id="cnt-prep"></span>
-    </button>
-    <button class="tab-btn" data-cat="map">
-      <span class="dot" style="background:#60a5fa"></span>
-      <span>💾 맵 운영 &amp; 저장</span><span class="count" id="cnt-map"></span>
-    </button>
-    <button class="tab-btn" data-cat="student">
-      <span class="dot" style="background:#f97316"></span>
-      <span>👩‍🏫 학생 지도 &amp; 규칙</span><span class="count" id="cnt-student"></span>
-    </button>
-    <button class="tab-btn" data-cat="edu">
-      <span class="dot" style="background:#4ade80"></span>
-      <span>📚 수업 진행 시</span><span class="count" id="cnt-edu"></span>
-    </button>
-<button class="tab-btn" data-cat="trouble">
-      <span class="dot" style="background:#fbbf24"></span>
-      <span>🚨 돌발 상황 대처</span><span class="count" id="cnt-trouble"></span>
-    </button>
-    <button class="tab-btn" data-cat="cmd">
-      <span class="dot" style="background:#f472b6"></span>
-      <span>🎁 명령어 모음</span><span class="count" id="cnt-cmd"></span>
-    </button>
-    <button class="tab-btn" data-cat="extra">📖 교재 밖 이야기</button>
-    <button class="tab-btn" data-cat="recipe">
-      <span class="dot" style="background:#14b8a6"></span>
-      <span>🔬 조합법</span>
+      <span>📋 수업 FAQ</span>
+      <span class="group-arrow" id="faqGroupArrow">▾</span>
     </button>
     <button class="tab-btn" data-cat="video">🎬 홍보 영상</button>
     <button class="tab-btn" data-cat="grass">
@@ -1051,6 +1041,45 @@
       <span class="dot" style="background:#6366f1"></span>
       <span>🌐 서버로 연결하는 방법(v.260805)</span>
     </button>
+    <button class="tab-btn" data-cat="servervideo">
+      <span class="dot" style="background:#6366f1"></span>
+      <span>🌐 서버로 연결하는 방법(영상)</span>
+    </button>
+
+    <div class="faq-subtabs" id="faqSubTabs">
+      <button class="tab-btn active" data-cat="all">
+        <span>전체</span><span class="count" id="cnt-all"></span>
+      </button>
+      <button class="tab-btn" data-cat="prep">
+        <span class="dot" style="background:#a78bfa"></span>
+        <span>⚙️ 수업 준비 &amp; 세팅</span><span class="count" id="cnt-prep"></span>
+      </button>
+      <button class="tab-btn" data-cat="map">
+        <span class="dot" style="background:#60a5fa"></span>
+        <span>💾 맵 운영 &amp; 저장</span><span class="count" id="cnt-map"></span>
+      </button>
+      <button class="tab-btn" data-cat="student">
+        <span class="dot" style="background:#f97316"></span>
+        <span>👩‍🏫 학생 지도 &amp; 규칙</span><span class="count" id="cnt-student"></span>
+      </button>
+      <button class="tab-btn" data-cat="edu">
+        <span class="dot" style="background:#4ade80"></span>
+        <span>📚 수업 진행 시</span><span class="count" id="cnt-edu"></span>
+      </button>
+      <button class="tab-btn" data-cat="trouble">
+        <span class="dot" style="background:#fbbf24"></span>
+        <span>🚨 돌발 상황 대처</span><span class="count" id="cnt-trouble"></span>
+      </button>
+      <button class="tab-btn" data-cat="cmd">
+        <span class="dot" style="background:#f472b6"></span>
+        <span>🎁 명령어 모음</span><span class="count" id="cnt-cmd"></span>
+      </button>
+      <button class="tab-btn" data-cat="extra">📖 교재 밖 이야기</button>
+      <button class="tab-btn" data-cat="recipe">
+        <span class="dot" style="background:#14b8a6"></span>
+        <span>🔬 조합법</span>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1121,6 +1150,22 @@
             onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
             ⬇️ PDF 다운로드
           </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="servervideo-section hidden" id="serverVideoSection" data-cat="servervideo">
+  <div style="max-width:860px;margin:20px auto;padding:0 16px">
+    <div style="background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,0.08);overflow:hidden">
+      <div style="background:linear-gradient(135deg,#6366f1,#4f46e5);padding:18px 24px;color:#fff">
+        <h3 style="margin:0;font-size:17px;font-family:'Pretendard','Noto Sans KR',sans-serif;font-weight:600">🌐 서버로 연결하는 방법(영상)</h3>
+      </div>
+      <div style="padding:20px">
+        <div style="position:relative;width:100%;padding-bottom:56.25%;border-radius:10px;overflow:hidden;background:#f4f4f4;border:1px solid #e5e7eb">
+          <iframe src="https://drive.google.com/file/d/1U9NGQ0asvbgvGH7QtYCNq1CNDYYHWE5c/preview"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:none"
+            allow="autoplay"></iframe>
         </div>
       </div>
     </div>
@@ -1892,12 +1937,46 @@ cats.forEach(cat => {
 
 // ── Tab filtering ──
 let activeTab = 'all';
+const FAQ_SUB_CATS = ['all','prep','map','student','edu','trouble','cmd','extra','recipe'];
+
+function toggleFaqGroup(e) {
+  e.stopPropagation();
+  const sub = document.getElementById('faqSubTabs');
+  const arrow = document.getElementById('faqGroupArrow');
+  const groupBtn = document.getElementById('faqGroupBtn');
+  const isOpen = sub.classList.contains('open');
+  if (isOpen) {
+    sub.classList.remove('open');
+    arrow.textContent = '▾';
+  } else {
+    sub.classList.add('open');
+    arrow.textContent = '▴';
+    groupBtn.classList.add('active');
+    // 처음 열 때는 기본으로 '전체' 탭을 보여줌
+    if (!FAQ_SUB_CATS.includes(activeTab)) {
+      const allBtn = sub.querySelector('[data-cat="all"]');
+      if (allBtn) allBtn.click();
+    }
+  }
+}
 document.getElementById('tabsBar').addEventListener('click', e => {
   const btn = e.target.closest('.tab-btn');
   if (!btn) return;
+  if (btn.id === 'faqGroupBtn') return; // 자체 onclick(toggleFaqGroup)에서 처리
   activeTab = btn.dataset.cat;
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
+  const faqGroupBtnEl = document.getElementById('faqGroupBtn');
+  const faqSubTabsEl = document.getElementById('faqSubTabs');
+  const faqGroupArrowEl = document.getElementById('faqGroupArrow');
+  if (FAQ_SUB_CATS.includes(activeTab)) {
+    // 수업 FAQ 하위 탭 클릭 시 그룹 버튼도 함께 강조
+    if (faqGroupBtnEl) faqGroupBtnEl.classList.add('active');
+  } else {
+    // 그 외 독립 탭 클릭 시 FAQ 서브메뉴는 접어줌
+    if (faqSubTabsEl) faqSubTabsEl.classList.remove('open');
+    if (faqGroupArrowEl) faqGroupArrowEl.textContent = '▾';
+  }
   searchInput.value = '';
   searchCount.textContent = '';
   const mapSec = document.getElementById('mapSection');
@@ -1905,12 +1984,14 @@ document.getElementById('tabsBar').addEventListener('click', e => {
   const videoSec = document.getElementById('videoSection');
   const grassSec = document.getElementById('grassSection');
   const serverSec = document.getElementById('serverSection');
+  const serverVideoSec = document.getElementById('serverVideoSection');
   if (activeTab === 'mapview') {
     mapSec.classList.remove('hidden');
     if(recipeSec) recipeSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
     if(serverSec) serverSec.classList.add('hidden');
+    if(serverVideoSec) serverVideoSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1921,6 +2002,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     if(videoSec) videoSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
     if(serverSec) serverSec.classList.add('hidden');
+    if(serverVideoSec) serverVideoSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1931,6 +2013,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     if(recipeSec) recipeSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
     if(serverSec) serverSec.classList.add('hidden');
+    if(serverVideoSec) serverVideoSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1941,6 +2024,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     if(recipeSec) recipeSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
     if(serverSec) serverSec.classList.add('hidden');
+    if(serverVideoSec) serverVideoSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1951,6 +2035,18 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     if(recipeSec) recipeSec.classList.add('hidden');
     if(videoSec) videoSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
+    if(serverVideoSec) serverVideoSec.classList.add('hidden');
+    document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
+    emptyState.classList.remove('show');
+    searchInput.value = '';
+    searchCount.textContent = '';
+  } else if (activeTab === 'servervideo') {
+    if(serverVideoSec) serverVideoSec.classList.remove('hidden');
+    mapSec.classList.add('hidden');
+    if(recipeSec) recipeSec.classList.add('hidden');
+    if(videoSec) videoSec.classList.add('hidden');
+    if(grassSec) grassSec.classList.add('hidden');
+    if(serverSec) serverSec.classList.add('hidden');
     document.querySelectorAll('.cat-section').forEach(s => s.classList.add('hidden'));
     emptyState.classList.remove('show');
     searchInput.value = '';
@@ -1961,6 +2057,7 @@ document.getElementById('tabsBar').addEventListener('click', e => {
     if(videoSec) videoSec.classList.add('hidden');
     if(grassSec) grassSec.classList.add('hidden');
     if(serverSec) serverSec.classList.add('hidden');
+    if(serverVideoSec) serverVideoSec.classList.add('hidden');
     applyFilters();
   }
 });
@@ -1971,16 +2068,20 @@ searchInput.addEventListener('input', () => {
   document.querySelectorAll('.tab-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.cat === 'all');
   });
+  const faqGroupBtnS = document.getElementById('faqGroupBtn');
+  if (faqGroupBtnS) faqGroupBtnS.classList.add('active');
   const mapSecS = document.getElementById('mapSection');
   const recipeSecS = document.getElementById('recipeSection');
   const videoSecS = document.getElementById('videoSection');
   const grassSecS = document.getElementById('grassSection');
   const serverSecS = document.getElementById('serverSection');
+  const serverVideoSecS = document.getElementById('serverVideoSection');
   if(mapSecS) mapSecS.classList.add('hidden');
   if(recipeSecS) recipeSecS.classList.add('hidden');
   if(videoSecS) videoSecS.classList.add('hidden');
   if(grassSecS) grassSecS.classList.add('hidden');
   if(serverSecS) serverSecS.classList.add('hidden');
+  if(serverVideoSecS) serverVideoSecS.classList.add('hidden');
   applyFilters();
 });
 
