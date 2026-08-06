@@ -2252,6 +2252,114 @@ document.querySelectorAll('.cat-section').forEach(sec => {
   }
   .contact-overlay.open { display: flex; }
 
+  /* 공지 팝업 */
+  .notice-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .notice-overlay.open { display: flex; }
+  .notice-popup {
+    background: #fff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 560px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    animation: popIn 0.25s ease;
+  }
+  .notice-header {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    padding: 20px 24px;
+    border-radius: 16px 16px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+  }
+  .notice-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .notice-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0 4px;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+  .notice-close:hover { opacity: 1; }
+  .notice-body {
+    padding: 22px 24px;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333;
+  }
+  .notice-body p { margin: 0 0 14px; }
+  .notice-body h4 {
+    margin: 18px 0 8px;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #ea580c;
+  }
+  .notice-body ul {
+    margin: 0 0 10px;
+    padding-left: 20px;
+  }
+  .notice-body li { margin-bottom: 6px; }
+  .notice-body hr {
+    border: none;
+    border-top: 1px dashed #e2e8f0;
+    margin: 18px 0;
+  }
+  .notice-footer {
+    padding: 14px 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f0f0f0;
+  }
+  .notice-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #666;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+  }
+  .notice-checkbox input { cursor: pointer; }
+  .notice-confirm {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 22px;
+    font-size: 13.5px;
+    font-weight: 600;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .notice-confirm:hover { opacity: 0.85; }
+
   .contact-popup {
     background: #fff;
     border-radius: 16px;
@@ -2575,6 +2683,45 @@ document.querySelectorAll('.cat-section').forEach(sec => {
   </div>
 </div>
 
+<div class="notice-overlay" id="noticeOverlay" onclick="if(event.target===this)closeNotice()">
+  <div class="notice-popup">
+    <div class="notice-header">
+      <h3>[공지] 마인크래프트 멀티플레이 및 서버 이용 관련 안내</h3>
+      <button class="notice-close" onclick="closeNotice()">✕</button>
+    </div>
+    <div class="notice-body">
+      <p>수업 진행 중 발생한 마인크래프트 접속 문제로 불편을 겪으셨을 선생님들께 안내 말씀드립니다.<br>
+      최근 문의가 다수 접수된 멀티플레이 오류 및 서버 이용과 관련하여 본사의 입장과 권장 대안을 안내해 드립니다.</p>
+
+      <h4>1. 최신 버전에서의 멀티플레이 오류 관련</h4>
+      <ul>
+        <li>본사 자체 점검 결과: 모든 기기 환경(PC-PC, PC-노트북, 노트북-노트북)에서 멀티플레이 호스트 및 접속이 정상적으로 작동함을 확인하였습니다.</li>
+        <li>오류 원인 안내: 개발사(Mojang/Microsoft) 측에서도 해당 현상에 대해 공식 오류가 아닌 '사용자 개별 네트워크 환경(방화벽, 보안 프로그램, 통신사 상태 등)' 점검을 안내하고 있습니다. 이에 따라 지사 및 개별 현장의 네트워크 환경까지 본사에서 직접 제어하거나 확인하기 어려운 점 양해 부탁드립니다.</li>
+      </ul>
+
+      <h4>2. 서버 구축(연결) 사용 여부</h4>
+      <ul>
+        <li>서버 연결의 목적: 기본 멀티플레이 기능이 구현되어 있으므로 서버 연결이 필수는 아닙니다.</li>
+        <li>대안 기능 제공: 다만, 개별 네트워크 문제로 멀티플레이가 불가함에도 수업상 다중 접속이 반드시 필요한 현장을 위해 비상 대안으로 서버 구축 방법을 안내해 드린 것입니다.</li>
+      </ul>
+
+      <hr>
+
+      <ul>
+        <li>본사 역시 개발사의 공식 업데이트 공지를 바탕으로 현장을 지원하고 있어, 외부 플랫폼 자체의 돌발 오류나 변수를 사전에 모두 예측하기에는 한계가 있습니다.</li>
+        <li>현재 기준 가장 안정적으로 다중 접속을 확보할 수 있는 최선의 방안이 '서버 구축' 방식입니다. 수업 중 다중 접속 환경이 필수적인 현장에서는 서버형 이용을 권장해 드립니다.</li>
+      </ul>
+    </div>
+    <div class="notice-footer">
+      <label class="notice-checkbox">
+        <input type="checkbox" id="noticeHideToday">
+        오늘 하루 보지 않기
+      </label>
+      <button class="notice-confirm" onclick="closeNotice()">확인</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const GS_URL = 'https://script.google.com/macros/s/AKfycbzgpK48r1rF_BGjeoxXTgmkfD9lrXbLPCKL-QW0tFfoneBaxTjDMTlFJT9xkkXg9egz8g/exec';
 
@@ -2737,6 +2884,31 @@ async function verifySecret(idx) {
     alert('확인에 실패했어요. 잠시 후 다시 시도해 주세요.');
   }
 }
+</script>
+
+<script>
+(function() {
+  const NOTICE_KEY = 'noticeHiddenDate_20260806';
+  const overlay = document.getElementById('noticeOverlay');
+  const todayStr = new Date().toISOString().slice(0, 10);
+
+  window.closeNotice = function() {
+    const hideCheckbox = document.getElementById('noticeHideToday');
+    if (hideCheckbox && hideCheckbox.checked) {
+      try { localStorage.setItem(NOTICE_KEY, todayStr); } catch (e) {}
+    }
+    overlay.classList.remove('open');
+  };
+
+  try {
+    const savedDate = localStorage.getItem(NOTICE_KEY);
+    if (savedDate !== todayStr) {
+      overlay.classList.add('open');
+    }
+  } catch (e) {
+    overlay.classList.add('open');
+  }
+})();
 </script>
 </body>
 </html>
